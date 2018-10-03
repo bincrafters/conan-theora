@@ -83,7 +83,7 @@ class TheoraConan(ConanFile):
             os.chmod(name, os.stat(name).st_mode | 0o111)
         with tools.chdir(self.source_subfolder):
             chmod_plus_x('configure')
-            configure_args = []
+            configure_args = ['--disable-examples']
             if self.options.shared:
                 configure_args.extend(['--disable-static', '--enable-shared'])
             else:
