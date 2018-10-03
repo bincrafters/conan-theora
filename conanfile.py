@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from conans import ConanFile, MSBuild, tools
+from conans import ConanFile, MSBuild, AutoToolsBuildEnvironment, tools
 import os
 
 
@@ -79,7 +79,23 @@ class TheoraConan(ConanFile):
             msbuild.build(sln, upgrade_project=True, platforms={'x86': 'Win32', 'x86_64': 'x64'})
 
     def build_configure(self):
-        raise Exception('TODO')
+        def chmod_plus_x(name):
+            os.chmod(name, os.stat(name).st_mode | 0o111)
+        with tools.chdir(self.source_subfolder):
+            chmod_plus_x('configure')
+            configure_args = []
+            if self.options.shared:
+                configure_args.extend(['--disable-static', '--enable-shared'])
+            else:
+                configure_args.extend(['--disable-shared', '--enable-static'])
+            env_build = AutoToolsBuildEnvironment(self)
+            if self.settings.os != 'Windows':
+                if self.options.fPIC:
+                    configure_args.append('--with-pic')
+                env_build.pic = self.options.fPIC
+            env_build.configure(args=configure_args)
+            env_build.make()
+            env_build.install()
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder)
