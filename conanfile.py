@@ -1,83 +1,97 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from conans import ConanFile, CMake, tools
+from conans import ConanFile, MSBuild, tools
 import os
 
 
-class LibnameConan(ConanFile):
-    name = "libname"
-    version = "0.0.0"
-    description = "Keep it short"
-    url = "https://github.com/bincrafters/conan-libname"
-    homepage = "https://github.com/original_author/original_lib"
+class TheoraConan(ConanFile):
+    name = "theora"
+    version = "1.1.1"
+    description = "Theora is a free and open video compression format from the Xiph.org Foundation"
+    url = "https://github.com/bincrafters/conan-theora"
+    homepage = "https://www.theora.org/"
     author = "Bincrafters <bincrafters@gmail.com>"
-    # Indicates License type of the packaged library
-    license = "MIT"
-
-    # Packages the license for the conanfile.py
+    license = "BSA"
     exports = ["LICENSE.md"]
-
-    # Remove following lines if the target lib does not use cmake.
-    exports_sources = ["CMakeLists.txt"]
-    generators = "cmake"
-
-    # Options may need to change depending on the packaged library.
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = "shared=False", "fPIC=True"
 
-    # Custom attributes for Bincrafters recipe conventions
     source_subfolder = "source_subfolder"
     build_subfolder = "build_subfolder"
 
-    # Use version ranges for dependencies unless there's a reason not to
-    # Update 2/9/18 - Per conan team, ranges are slow to resolve.
-    # So, with libs like zlib, updates are very rare, so we now use static version
-
-
     requires = (
-        "OpenSSL/[>=1.0.2l]@conan/stable",
-        "zlib/1.2.11@conan/stable"
+        "ogg/1.3.3@bincrafters/stable",
+        "vorbis/1.3.6@bincrafters/stable"
     )
 
     def config_options(self):
+        del self.settings.compiler.libcxx
         if self.settings.os == 'Windows':
             del self.options.fPIC
 
     def source(self):
-        source_url = "https://github.com/libauthor/libname"
-        tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version))
-        extracted_dir = self.name + "-" + self.version
-
-        #Rename to "source_subfolder" is a convention to simplify later steps
+        source_url = "http://downloads.xiph.org/releases/theora/libtheora-%s.zip" % self.version
+        tools.get(source_url)
+        extracted_dir = 'lib' + self.name + "-" + self.version
         os.rename(extracted_dir, self.source_subfolder)
 
-    def configure_cmake(self):
-        cmake = CMake(self)
-        cmake.definitions["BUILD_TESTS"] = False # example
-        if self.settings.os != 'Windows':
-            cmake.definitions['CMAKE_POSITION_INDEPENDENT_CODE'] = self.options.fPIC
-        cmake.configure(build_folder=self.build_subfolder)
-        return cmake
+        with tools.chdir(os.path.join(self.source_subfolder, 'lib')):
+            # file somehow missed in distribution
+            tools.download('https://raw.githubusercontent.com/xiph/theora/master/lib/theora.def', 'theora.def')
 
     def build(self):
-        cmake = self.configure_cmake()
-        cmake.build()
+        if self.settings.compiler == 'Visual Studio':
+            self.build_msvc()
+        else:
+            self.build_configure()
+
+    def build_msvc(self):
+        # error C2491: 'rint': definition of dllimport function not allowed
+        tools.replace_in_file(os.path.join(self.source_subfolder, 'examples', 'encoder_example.c'),
+                              'static double rint(double x)',
+                              'static double rint_(double x)')
+
+        def format_libs(libs):
+            return ' '.join([l + '.lib' for l in libs])
+
+        # fix hard-coded library names
+        for project in ['encoder_example', 'libtheora', 'dump_video']:
+            for config in ['dynamic', 'static']:
+                vcvproj = '%s_%s.vcproj' % (project, config)
+                tools.replace_in_file(os.path.join(self.source_subfolder, 'win32', 'VS2008', project, vcvproj),
+                                      'libogg.lib',
+                                      format_libs(self.deps_cpp_info['ogg'].libs), strict=False)
+                tools.replace_in_file(os.path.join(self.source_subfolder, 'win32', 'VS2008', project, vcvproj),
+                                      'libogg_static.lib',
+                                      format_libs(self.deps_cpp_info['ogg'].libs), strict=False)
+                tools.replace_in_file(os.path.join(self.source_subfolder, 'win32', 'VS2008', project, vcvproj),
+                                      'libvorbis.lib',
+                                      format_libs(self.deps_cpp_info['vorbis'].libs), strict=False)
+                tools.replace_in_file(os.path.join(self.source_subfolder, 'win32', 'VS2008', project, vcvproj),
+                                      'libvorbis_static.lib',
+                                      format_libs(self.deps_cpp_info['vorbis'].libs), strict=False)
+
+        with tools.chdir(os.path.join(self.source_subfolder, 'win32', 'VS2008')):
+            sln = 'libtheora_dynamic.sln' if self.options.shared else 'libtheora_static.sln'
+            msbuild = MSBuild(self)
+            msbuild.build(sln, upgrade_project=True, platforms={'x86': 'Win32', 'x86_64': 'x64'})
+
+    def build_configure(self):
+        raise Exception('TODO')
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder)
-        cmake = self.configure_cmake()
-        cmake.install()
-        # If the CMakeLists.txt has a proper install method, the steps below may be redundant
-        # If so, you can just remove the lines below
-        include_folder = os.path.join(self.source_subfolder, "include")
-        self.copy(pattern="*", dst="include", src=include_folder)
-        self.copy(pattern="*.dll", dst="bin", keep_path=False)
-        self.copy(pattern="*.lib", dst="lib", keep_path=False)
-        self.copy(pattern="*.a", dst="lib", keep_path=False)
-        self.copy(pattern="*.so*", dst="lib", keep_path=False)
-        self.copy(pattern="*.dylib", dst="lib", keep_path=False)
+        self.copy(pattern="COPYING", dst="licenses", src=self.source_subfolder)
+        if self.settings.compiler == 'Visual Studio':
+            include_folder = os.path.join(self.source_subfolder, "include")
+            self.copy(pattern="*.h", dst="include", src=include_folder)
+            self.copy(pattern="*.dll", dst="bin", keep_path=False)
+            self.copy(pattern="*.lib", dst="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = tools.collect_libs(self)
+        if self.settings.compiler == 'Visual Studio':
+            self.cpp_info.libs = ['libtheora' if self.options.shared else 'libtheora_static']
+        else:
+            self.cpp_info.libs = ['theora']
