@@ -2,7 +2,7 @@
 
 | Bintray | Windows | Linux & macOS |
 |:--------:|:---------:|:-----------------:|
-|[![Download](https://api.bintray.com/packages/bincrafters/public-conan/theora%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/theora%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-theora?&svg=true)](https://ci.appveyor.com/project/bincrafters/conan-theora)|[![Build Status](https://travis-ci.org/bincrafters/conan-theora.svg)](https://travis-ci.org/bincrafters/conan-theora)|
+|[![Download](https://api.bintray.com/packages/bincrafters/public-conan/theora%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/theora%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-theora?svg=true)](https://ci.appveyor.com/project/bincrafters/conan-theora)|[![Build Status](https://travis-ci.org/bincrafters/conan-theora.svg)](https://travis-ci.org/bincrafters/conan-theora)|
 
 ## Conan.io Information
 
