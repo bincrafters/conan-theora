@@ -13,7 +13,7 @@ class TheoraConan(ConanFile):
     homepage = "https://github.com/xiph/theora"
     author = "Bincrafters <bincrafters@gmail.com>"
     topics = ("conan", "theora", "video", "video-compressor", "video-format")
-    license = "BSA"
+    license = "BSD-3-Clause"
     exports = ["LICENSE.md"]
     exports_sources = "theora.patch"
     settings = "os", "arch", "compiler", "build_type"
