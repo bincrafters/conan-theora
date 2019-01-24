@@ -11,68 +11,6 @@ index 4b73b64..7dcb933 100644
  {
    if (x < 0.0)
      return (double)(int)(x - 0.5);
-diff --git a/lib/theora.def b/lib/theora.def
-new file mode 100644
-index 0000000..22e4d65
---- /dev/null
-+++ b/lib/theora.def
-@@ -0,0 +1,56 @@
-+LIBRARY	libtheora
-+EXPORTS
-+	theora_version_string
-+	theora_version_number
-+	theora_encode_init
-+	theora_encode_YUVin
-+	theora_encode_packetout
-+	theora_encode_header
-+	theora_encode_comment
-+	theora_encode_tables
-+	theora_decode_header
-+	theora_decode_init
-+	theora_decode_packetin
-+	theora_decode_YUVout
-+	theora_control
-+	theora_packet_isheader
-+	theora_packet_iskeyframe
-+	theora_granule_shift
-+	theora_granule_frame
-+	theora_granule_time
-+	theora_info_init
-+	theora_info_clear
-+	theora_clear
-+	theora_comment_init
-+	theora_comment_add
-+	theora_comment_add_tag
-+	theora_comment_query
-+	theora_comment_query_count
-+	theora_comment_clear
-+	th_version_string
-+	th_version_number
-+	th_decode_headerin
-+	th_decode_alloc
-+	th_setup_free
-+	th_decode_ctl
-+	th_decode_packetin
-+	th_decode_ycbcr_out
-+	th_decode_free
-+	th_packet_isheader
-+	th_packet_iskeyframe
-+	th_granule_frame
-+	th_granule_time
-+	th_info_init
-+	th_info_clear
-+	th_comment_init
-+	th_comment_add
-+	th_comment_add_tag
-+	th_comment_query
-+	th_comment_query_count
-+	th_comment_clear
-+	th_encode_alloc
-+	th_encode_ctl
-+	th_encode_flushheader
-+	th_encode_packetout
-+	th_encode_ycbcr_in
-+	th_encode_free
 diff --git a/win32/VS2008/dump_video/dump_video_dynamic.vcproj b/win32/VS2008/dump_video/dump_video_dynamic.vcproj
 index 9a6f49f..e1f081e 100644
 --- a/win32/VS2008/dump_video/dump_video_dynamic.vcproj
@@ -226,7 +164,7 @@ index 60d6d74..243bc1a 100644
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
 diff --git a/win32/VS2008/encoder_example/encoder_example_dynamic.vcproj b/win32/VS2008/encoder_example/encoder_example_dynamic.vcproj
-index d68d8ac..aaf5deb 100644
+index d68d8ac..7c63063 100644
 --- a/win32/VS2008/encoder_example/encoder_example_dynamic.vcproj
 +++ b/win32/VS2008/encoder_example/encoder_example_dynamic.vcproj
 @@ -17,7 +17,7 @@
@@ -234,7 +172,7 @@ index d68d8ac..aaf5deb 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg.lib libvorbis.lib libtheora.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -243,7 +181,7 @@ index d68d8ac..aaf5deb 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg.lib libvorbis.lib libtheora.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -252,7 +190,7 @@ index d68d8ac..aaf5deb 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg.lib libvorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -261,7 +199,7 @@ index d68d8ac..aaf5deb 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg.lib libvorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -270,7 +208,7 @@ index d68d8ac..aaf5deb 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg.lib libvorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -279,7 +217,7 @@ index d68d8ac..aaf5deb 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg.lib libvorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -288,7 +226,7 @@ index d68d8ac..aaf5deb 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg.lib libvorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -297,12 +235,12 @@ index d68d8ac..aaf5deb 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg.lib libvorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
 diff --git a/win32/VS2008/encoder_example/encoder_example_static.vcproj b/win32/VS2008/encoder_example/encoder_example_static.vcproj
-index 91cee2d..70e8ac6 100644
+index 91cee2d..2068b37 100644
 --- a/win32/VS2008/encoder_example/encoder_example_static.vcproj
 +++ b/win32/VS2008/encoder_example/encoder_example_static.vcproj
 @@ -17,7 +17,7 @@
@@ -310,7 +248,7 @@ index 91cee2d..70e8ac6 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg_static.lib libvorbis_static.lib libtheora_static.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora_static.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora_static.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -319,7 +257,7 @@ index 91cee2d..70e8ac6 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg_static.lib libvorbis_static.lib libtheora_static.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora_static.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora_static.lib" LinkIncremental="2" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="true" SubSystem="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -328,7 +266,7 @@ index 91cee2d..70e8ac6 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg_static.lib libvorbis_static.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -337,7 +275,7 @@ index 91cee2d..70e8ac6 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg_static.lib libvorbis_static.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -346,7 +284,7 @@ index 91cee2d..70e8ac6 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg_static.lib libvorbis_static.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -355,7 +293,7 @@ index 91cee2d..70e8ac6 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg_static.lib libvorbis_static.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -364,7 +302,7 @@ index 91cee2d..70e8ac6 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg_static.lib libvorbis_static.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="1"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -373,7 +311,7 @@ index 91cee2d..70e8ac6 100644
  			<Tool Name="VCResourceCompilerTool"/>
  			<Tool Name="VCPreLinkEventTool"/>
 -			<Tool Name="VCLinkerTool" AdditionalDependencies="libogg_static.lib libvorbis_static.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
-+			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib m.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
++			<Tool Name="VCLinkerTool" AdditionalDependencies="ogg.lib vorbisfile.lib vorbisenc.lib vorbis.lib libtheora_static.lib" LinkIncremental="1" AdditionalLibraryDirectories="&quot;..\..\..\..\libogg\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\..\..\..\libvorbis\win32\VS2008\$(PlatformName)\$(ConfigurationName)&quot;;&quot;..\$(PlatformName)\$(ConfigurationName)&quot;" GenerateDebugInformation="false" SubSystem="1" OptimizeReferences="2" EnableCOMDATFolding="2" OptimizeForWindows98="1" RandomizedBaseAddress="1" DataExecutionPrevention="0" TargetMachine="17"/>
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCManifestTool"/>
  			<Tool Name="VCXDCMakeTool"/>
@@ -561,3 +499,65 @@ index 56fcee5..a6c9325 100644
  			<Tool Name="VCALinkTool"/>
  			<Tool Name="VCXDCMakeTool"/>
  			<Tool Name="VCBscMakeTool"/>
+diff --git a/lib/theora.def b/lib/theora.def
+new file mode 100644
+index 0000000..22e4d65
+--- /dev/null
++++ b/lib/theora.def
+@@ -0,0 +1,56 @@
++LIBRARY	libtheora
++EXPORTS
++	theora_version_string
++	theora_version_number
++	theora_encode_init
++	theora_encode_YUVin
++	theora_encode_packetout
++	theora_encode_header
++	theora_encode_comment
++	theora_encode_tables
++	theora_decode_header
++	theora_decode_init
++	theora_decode_packetin
++	theora_decode_YUVout
++	theora_control
++	theora_packet_isheader
++	theora_packet_iskeyframe
++	theora_granule_shift
++	theora_granule_frame
++	theora_granule_time
++	theora_info_init
++	theora_info_clear
++	theora_clear
++	theora_comment_init
++	theora_comment_add
++	theora_comment_add_tag
++	theora_comment_query
++	theora_comment_query_count
++	theora_comment_clear
++	th_version_string
++	th_version_number
++	th_decode_headerin
++	th_decode_alloc
++	th_setup_free
++	th_decode_ctl
++	th_decode_packetin
++	th_decode_ycbcr_out
++	th_decode_free
++	th_packet_isheader
++	th_packet_iskeyframe
++	th_granule_frame
++	th_granule_time
++	th_info_init
++	th_info_clear
++	th_comment_init
++	th_comment_add
++	th_comment_add_tag
++	th_comment_query
++	th_comment_query_count
++	th_comment_clear
++	th_encode_alloc
++	th_encode_ctl
++	th_encode_flushheader
++	th_encode_packetout
++	th_encode_ycbcr_in
++	th_encode_free
