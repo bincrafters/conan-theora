@@ -75,26 +75,32 @@ class TheoraConan(ConanFile):
             return ' '.join([l + '.lib' for l in libs])
 
         # fix hard-coded library names
-        for project in ['encoder_example', 'libtheora', 'dump_video']:
-            for config in ['dynamic', 'static']:
-                vcvproj = '%s_%s.vcproj' % (project, config)
-                tools.replace_in_file(os.path.join(self._source_subfolder, 'win32', 'VS2008', project, vcvproj),
-                                      'libogg.lib',
-                                      format_libs(self.deps_cpp_info['ogg'].libs), strict=False)
-                tools.replace_in_file(os.path.join(self._source_subfolder, 'win32', 'VS2008', project, vcvproj),
-                                      'libogg_static.lib',
-                                      format_libs(self.deps_cpp_info['ogg'].libs), strict=False)
-                tools.replace_in_file(os.path.join(self._source_subfolder, 'win32', 'VS2008', project, vcvproj),
-                                      'libvorbis.lib',
-                                      format_libs(self.deps_cpp_info['vorbis'].libs), strict=False)
-                tools.replace_in_file(os.path.join(self._source_subfolder, 'win32', 'VS2008', project, vcvproj),
-                                      'libvorbis_static.lib',
-                                      format_libs(self.deps_cpp_info['vorbis'].libs), strict=False)
+        project = 'libtheora'
+        config = "dynamic" if self.options.shared else "static"
+
+        vcvproj = '%s_%s.vcproj' % (project, config)
+        vcvproj_path = os.path.join(self._source_subfolder, 'win32', 'VS2008', project, vcvproj)
+        tools.replace_in_file(vcvproj_path,
+                                'libogg.lib',
+                                format_libs(self.deps_cpp_info['ogg'].libs), strict=False)
+        tools.replace_in_file(vcvproj_path,
+                                'libogg_static.lib',
+                                format_libs(self.deps_cpp_info['ogg'].libs), strict=False)
+        tools.replace_in_file(vcvproj_path,
+                                'libvorbis.lib',
+                                format_libs(self.deps_cpp_info['vorbis'].libs), strict=False)
+        tools.replace_in_file(vcvproj_path,
+                                'libvorbis_static.lib',
+                                format_libs(self.deps_cpp_info['vorbis'].libs), strict=False)
+        if "MT" in self.settings.compiler.runtime:
+            tools.replace_in_file(vcvproj_path, 'RuntimeLibrary="2"', 'RuntimeLibrary="0"')
+            tools.replace_in_file(vcvproj_path, 'RuntimeLibrary="3"', 'RuntimeLibrary="1"')
 
         with tools.chdir(os.path.join(self._source_subfolder, 'win32', 'VS2008')):
-            sln = 'libtheora_dynamic.sln' if self.options.shared else 'libtheora_static.sln'
+            target = 'libtheora_dynamic' if self.options.shared else 'libtheora_static'
+            sln = target + '.sln'
             msbuild = MSBuild(self)
-            msbuild.build(sln, upgrade_project=True, platforms={'x86': 'Win32', 'x86_64': 'x64'})
+            msbuild.build(sln, platforms={'x86': 'Win32', 'x86_64': 'x64'}, targets=[target])
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
