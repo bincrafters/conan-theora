@@ -15,7 +15,6 @@ class TheoraConan(ConanFile):
     topics = ("conan", "theora", "video", "video-compressor", "video-format")
     license = "BSD-3-Clause"
     exports = ["LICENSE.md"]
-    exports_sources = "theora.patch"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
@@ -40,6 +39,11 @@ class TheoraConan(ConanFile):
         extracted_dir = 'lib' + self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
 
+        with tools.chdir(os.path.join(self._source_subfolder, 'lib')):
+            # file somehow missed in distribution
+            tools.download('https://raw.githubusercontent.com/xiph/theora/master/lib/theora.def', 'theora.def')
+            assert "56362ca0cc73172c06b53866ba52fad941d02fc72084d292c705a1134913e806" == tools.sha256sum('theora.def')
+
     def _configure_autotools(self):
         if not self._autotools:
             permission = stat.S_IMODE(os.lstat("configure").st_mode)
@@ -54,7 +58,6 @@ class TheoraConan(ConanFile):
         return self._autotools
 
     def build(self):
-        tools.patch(base_path=self._source_subfolder, patch_file="theora.patch")
         if self.settings.compiler == 'Visual Studio':
             self._build_msvc()
         else:
@@ -63,6 +66,31 @@ class TheoraConan(ConanFile):
                 autotools.make()
 
     def _build_msvc(self):
+        # error C2491: 'rint': definition of dllimport function not allowed
+        tools.replace_in_file(os.path.join(self._source_subfolder, 'examples', 'encoder_example.c'),
+                              'static double rint(double x)',
+                              'static double rint_(double x)')
+
+        def format_libs(libs):
+            return ' '.join([l + '.lib' for l in libs])
+
+        # fix hard-coded library names
+        for project in ['encoder_example', 'libtheora', 'dump_video']:
+            for config in ['dynamic', 'static']:
+                vcvproj = '%s_%s.vcproj' % (project, config)
+                tools.replace_in_file(os.path.join(self._source_subfolder, 'win32', 'VS2008', project, vcvproj),
+                                      'libogg.lib',
+                                      format_libs(self.deps_cpp_info['ogg'].libs), strict=False)
+                tools.replace_in_file(os.path.join(self._source_subfolder, 'win32', 'VS2008', project, vcvproj),
+                                      'libogg_static.lib',
+                                      format_libs(self.deps_cpp_info['ogg'].libs), strict=False)
+                tools.replace_in_file(os.path.join(self._source_subfolder, 'win32', 'VS2008', project, vcvproj),
+                                      'libvorbis.lib',
+                                      format_libs(self.deps_cpp_info['vorbis'].libs), strict=False)
+                tools.replace_in_file(os.path.join(self._source_subfolder, 'win32', 'VS2008', project, vcvproj),
+                                      'libvorbis_static.lib',
+                                      format_libs(self.deps_cpp_info['vorbis'].libs), strict=False)
+
         with tools.chdir(os.path.join(self._source_subfolder, 'win32', 'VS2008')):
             sln = 'libtheora_dynamic.sln' if self.options.shared else 'libtheora_static.sln'
             msbuild = MSBuild(self)
