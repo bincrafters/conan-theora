@@ -97,8 +97,8 @@ class TheoraConan(ConanFile):
             tools.replace_in_file(vcvproj_path, 'RuntimeLibrary="3"', 'RuntimeLibrary="1"')
 
         with tools.chdir(os.path.join(self._source_subfolder, 'win32', 'VS2008')):
-            target = 'libtheora_dynamic' if self.options.shared else 'libtheora_static'
-            sln = target + '.sln'
+            target = 'libtheora' if self.options.shared else 'libtheora_static'
+            sln = 'libtheora_dynamic.sln' if self.options.shared else 'libtheora_static.sln'
             msbuild = MSBuild(self)
             msbuild.build(sln, platforms={'x86': 'Win32', 'x86_64': 'x64'}, targets=[target])
 
