@@ -82,7 +82,4 @@ class TheoraConan(ConanFile):
                 autotools.install()
 
     def package_info(self):
-        if self.settings.compiler == 'Visual Studio':
-            self.cpp_info.libs = ['libtheora' if self.options.shared else 'libtheora_static']
-        else:
-            self.cpp_info.libs = ['theora']
+        self.cpp_info.libs = tools.collect_libs(self)
