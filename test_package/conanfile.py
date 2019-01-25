@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
-
-from conans import ConanFile, CMake
 import os
+from conans import ConanFile, CMake
 
 
 class TestPackageConan(ConanFile):
