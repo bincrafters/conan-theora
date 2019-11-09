@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import os
 import stat
 from conans import ConanFile, MSBuild, AutoToolsBuildEnvironment, tools
@@ -11,7 +9,6 @@ class TheoraConan(ConanFile):
     description = "Theora is a free and open video compression format from the Xiph.org Foundation"
     url = "https://github.com/bincrafters/conan-theora"
     homepage = "https://github.com/xiph/theora"
-    author = "Bincrafters <bincrafters@gmail.com>"
     topics = ("conan", "theora", "video", "video-compressor", "video-format")
     license = "BSD-3-Clause"
     exports = ["LICENSE.md"]
@@ -31,6 +28,7 @@ class TheoraConan(ConanFile):
 
     def configure(self):
         del self.settings.compiler.libcxx
+        del self.settings.compiler.cppstd
 
     def source(self):
         source_url = "http://downloads.xiph.org/releases/theora/libtheora-%s.zip" % self.version
