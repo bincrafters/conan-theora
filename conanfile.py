@@ -17,7 +17,7 @@ class TheoraConan(ConanFile):
     default_options = {"shared": False, "fPIC": True}
     requires = (
         "ogg/1.3.4",
-        "vorbis/1.3.6@bincrafters/stable"
+        "vorbis/1.3.6"
     )
     _source_subfolder = "source_subfolder"
     _autotools = None
