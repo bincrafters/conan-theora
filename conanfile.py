@@ -11,7 +11,6 @@ class TheoraConan(ConanFile):
     homepage = "https://github.com/xiph/theora"
     topics = ("conan", "theora", "video", "video-compressor", "video-format")
     license = "BSD-3-Clause"
-    exports = ["LICENSE.md"]
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
