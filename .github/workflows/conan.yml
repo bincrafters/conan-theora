@@ -63,7 +63,7 @@ jobs:
           matrix=$(echo ${BPT_MATRIX})
           echo "BPT_MATRIX=${matrix}" >> $GITHUB_ENV
         shell: bash
-      - name: Prepare Environment subprocess.call
+      - name: Prepare Environment os.system3
         run: |
           bincrafters-package-tools prepare-env --platform gha --config "${BPT_MATRIX}"
         shell: bash
