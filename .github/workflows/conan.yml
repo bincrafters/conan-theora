@@ -60,15 +60,15 @@ jobs:
           BPT_MATRIX: ${{toJson(matrix.config)}}
         run: |
           pip install git+https://github.com/bincrafters/bincrafters-package-tools@develop
+          matrix=$(echo ${BPT_MATRIX})
+          echo "BPT_MATRIX=${matrix}" >> $GITHUB_ENV
         shell: bash
       - name: Prepare Environment For Linux / macOS
         run: |
-          bincrafters-package-tools prepare-env --platform gha --config '${{ needs.generate-matrix.outputs.matrix }}"
+          bincrafters-package-tools prepare-env --platform gha --config '${BPT_MATRIX}"
         shell: bash
         if: matrix.config.os != 'windows-2019' && matrix.config.os != 'vs2017-win2016'
       - name: Prepare Environment For Windows
-        env:
-          BPT_MATRIX: ${{ needs.generate-matrix.outputs.matrix }}
         run: |
           echo $env:BPT_MATRIX
           bincrafters-package-tools prepare-env --platform gha --config '$env:BPT_MATRIX'
