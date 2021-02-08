@@ -65,13 +65,15 @@ jobs:
         shell: bash
       - name: Prepare Environment For Linux / macOS
         run: |
-          bincrafters-package-tools prepare-env --platform gha --config '${BPT_MATRIX}"
+          bincrafters-package-tools prepare-env --platform gha --config '${BPT_MATRIX}'
         shell: bash
         if: matrix.config.os != 'windows-2019' && matrix.config.os != 'vs2017-win2016'
       - name: Prepare Environment For Windows
         run: |
           echo $env:BPT_MATRIX
-          bincrafters-package-tools prepare-env --platform gha --config '$env:BPT_MATRIX'
+          $BPT_MATRIX = '''$env:BPT_MATRIX'''
+          $matrix = $ExecutionContext.InvokeCommand.ExpandString($BPT_MATRIX)
+          bincrafters-package-tools prepare-env --platform gha --config $matrix
         shell: powershell
         if: matrix.config.os == 'windows-2019' || matrix.config.os == 'vs2017-win2016'
       - name: Run
