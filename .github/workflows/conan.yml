@@ -71,8 +71,8 @@ jobs:
         run: |
           pip install git+https://github.com/bincrafters/bincrafters-package-tools@develop
           # remove newlines from matrix first
-          matrix=$(echo ${BPT_MATRIX})
-          bincrafters-package-tools prepare-env --platform gha --config "${matrix}"
+          $matrix=$BPT_MATRIX.replace("`n",", ").replace("`r",", ")
+          bincrafters-package-tools prepare-env --platform gha --config "$matrix"
         shell: powershell
         if: matrix.config.os == 'windows-2019' || matrix.config.os == 'vs2017-win2016'
       - name: Run
