@@ -62,20 +62,16 @@ jobs:
           pip install git+https://github.com/bincrafters/bincrafters-package-tools@develop
         shell: bash
       - name: Prepare Environment For Linux / macOS
-        env:
-          BPT_MATRIX: ${{toJson(matrix.config)}}
         run: |
-          # remove newlines from matrix first
-          matrix=$(echo ${BPT_MATRIX})
-          bincrafters-package-tools prepare-env --platform gha --config "${matrix}"
+          bincrafters-package-tools prepare-env --platform gha --config '${{ needs.generate-matrix.outputs.matrix }}"
         shell: bash
         if: matrix.config.os != 'windows-2019' && matrix.config.os != 'vs2017-win2016'
       - name: Prepare Environment For Windows
         env:
-          BPT_MATRIX: ${{toJson(matrix.config)}}
-          BPT_MATRIXY: ${{matrix.config}}
+          BPT_MATRIX: ${{ needs.generate-matrix.outputs.matrix }}
         run: |
-          bincrafters-package-tools prepare-env --platform gha --config '$env:BPT_MATRIXY'
+          echo $env:BPT_MATRIX
+          bincrafters-package-tools prepare-env --platform gha --config '$env:BPT_MATRIX'
         shell: powershell
         if: matrix.config.os == 'windows-2019' || matrix.config.os == 'vs2017-win2016'
       - name: Run
