@@ -61,16 +61,10 @@ jobs:
         run: |
           pip install git+https://github.com/bincrafters/bincrafters-package-tools@develop
           matrix=$(echo ${BPT_MATRIX})
-          echo "BPT_MATRIX=${matrix}" >> $GITHUB_ENV
-        shell: bash
-      - name: Prepare Environment os.system3
-        run: |
-          bincrafters-package-tools prepare-env --platform gha --config "${BPT_MATRIX}"
-        shell: bash
+          bincrafters-package-tools prepare-env --platform gha --config "${matrix}"
       - name: Run
         env:
           CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
-        shell: bash
         run: |
           bincrafters-package-tools --auto
